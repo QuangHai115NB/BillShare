@@ -14,7 +14,7 @@ public class UserCreateRequest {
     @NotBlank
     private String email;
 
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @Size(min = 8, message = "Mat khau dai hon 8 ky tu")
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
             message = "Password must contain at least 1 uppercase letter, 1 lowercase letter and 1 number"

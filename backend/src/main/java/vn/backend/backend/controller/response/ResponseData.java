@@ -10,7 +10,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ResponseData  <T>{
+
+public class ResponseData <T>{
     private final int status;
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
