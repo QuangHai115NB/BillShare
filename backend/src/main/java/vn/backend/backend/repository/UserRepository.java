@@ -1,10 +1,14 @@
 package vn.backend.backend.repository;
 
+import vn.backend.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import vn.backend.backend.model.UserEntity;
 
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity,Long> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    boolean existsByEmail(String email);
+
+    Optional<User> findByEmail(String email);
 }
+
