@@ -17,6 +17,7 @@ spring:
       connection-timeout: 30000
       leak-detection-threshold: 20000
   mail:
+    display-name: ${APP_NAME}
     host: smtp.gmail.com
     port: 587
     username: ${MAIL_USERNAME}

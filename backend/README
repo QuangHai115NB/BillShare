@@ -43,4 +43,4 @@ git add .
 git commit -m "feat: hoàn thành xử lý đăng nhập và trả về jwt"
 
 # Bước 4: Đẩy code lên GitHub
-git push origin main
+git push origin master
