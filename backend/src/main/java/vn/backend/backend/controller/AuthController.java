@@ -3,10 +3,7 @@ package vn.backend.backend.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.backend.backend.common.dto.request.LoginRequest;
 import vn.backend.backend.common.dto.request.RegisterRequest;
 import vn.backend.backend.common.dto.response.LoginResponse;
@@ -19,6 +16,12 @@ import vn.backend.backend.service.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+
+    @PostMapping("/send-otp")
+    public ResponseEntity<String> sendOtp(@RequestParam String email) {
+        authService.requestRegistrationOtp(email); // Thêm chữ "Otp" vào cuối
+        return ResponseEntity.ok("Mã OTP đã được gửi về email.");
+    }
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(
