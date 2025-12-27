@@ -32,3 +32,15 @@
 ## 4.swagger
 -
 http://localhost:8080/swagger-ui/index.html#
+
+# Bước 1: Kiểm tra lại các file đã thay đổi (để chắc chắn không add nhầm file rác)
+git status
+
+# Bước 2: Đưa các file đã sửa vào hàng chờ
+git add .
+
+# Bước 3: Lưu lại với lời nhắn mô tả việc bạn vừa làm
+git commit -m "feat: hoàn thành xử lý đăng nhập và trả về jwt"
+
+# Bước 4: Đẩy code lên GitHub
+git push origin main

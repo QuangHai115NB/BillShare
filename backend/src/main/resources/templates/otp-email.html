@@ -2,25 +2,254 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .container { font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; }
-        .header { background-color: #f8f9fa; padding: 10px; text-align: center; }
-        .otp-code { font-size: 24px; font-weight: bold; color: #007bff; letter-spacing: 5px; text-align: center; margin: 20px 0; }
-        .footer { font-size: 12px; color: #888; text-align: center; margin-top: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+
+        .email-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .greeting {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .message {
+            font-size: 15px;
+            color: #555555;
+            margin-bottom: 30px;
+        }
+
+        .otp-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px dashed #667eea;
+        }
+
+        .otp-label {
+            font-size: 13px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .otp-code {
+            font-size: 42px;
+            font-weight: 700;
+            color: #667eea;
+            letter-spacing: 12px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .expiry-notice {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 25px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+
+        .expiry-notice strong {
+            color: #856404;
+        }
+
+        .warning {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666666;
+            border-left: 4px solid #6c757d;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 50%;
+            background: #667eea;
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 5px;
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 25px 0;
+        }
+
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .otp-code {
+                font-size: 36px;
+                letter-spacing: 8px;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="email-wrapper">
+    <!-- Header -->
     <div class="header">
-        <h2>Xác thực Đăng ký Tài khoản</h2>
+        <div class="logo">💳</div>
+        <h1>Bill Share</h1>
+        <p>Quản lý chi tiêu thông minh</p>
     </div>
-    <p>Chào bạn,</p>
-    <p>Bạn đang thực hiện đăng ký tài khoản tại hệ thống của chúng tôi. Vui lòng sử dụng mã OTP dưới đây để hoàn tất quá trình:</p>
-    <div class="otp-code" th:text="${otpCode}">123456</div>
-    <p>Mã này sẽ hết hạn trong vòng <b>5 phút</b>.</p>
-    <p>Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email này.</p>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="greeting">
+            👋 Xin chào!
+        </div>
+
+        <p class="message">
+            Bạn đang thực hiện đăng ký tài khoản tại <strong>Bill Share</strong>.
+            Để hoàn tất quá trình xác thực, vui lòng sử dụng mã OTP bên dưới:
+        </p>
+
+        <!-- OTP Box -->
+        <div class="otp-container">
+            <div class="otp-label">Mã xác thực của bạn</div>
+            <div class="otp-code" th:text="${otpCode}">123456</div>
+        </div>
+
+        <!-- Expiry Notice -->
+        <div class="expiry-notice">
+            <span class="icon">⏰</span>
+            <strong>Lưu ý:</strong> Mã OTP này sẽ hết hiệu lực sau <strong>5 phút</strong> kể từ khi nhận được email.
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Security Warning -->
+        <div class="warning">
+            <span class="icon">🔒</span>
+            <strong>Bảo mật tài khoản:</strong><br>
+            Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email.
+            Không chia sẻ mã OTP với bất kỳ ai để bảo vệ tài khoản của bạn.
+        </div>
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
-        &copy; 2025 Remake Project - All rights reserved.
+        <div class="footer-logo">Bill Share</div>
+        <p class="footer-text">
+            Ứng dụng quản lý và chia sẻ hóa đơn thông minh
+        </p>
+        <p class="footer-text">
+            &copy; 2025 Bill Share - All rights reserved.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="footer-text" style="font-size: 11px; color: #aaa;">
+            Email này được gửi tự động, vui lòng không trả lời.
+        </p>
     </div>
 </div>
 </body>
